@@ -3,78 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Procelligence - Model-Based Biotech and Bio/Pharma Solutions</title>
+    <title>Procelligence AI - Intelligent Solutions for Biotech & Bio/Pharma</title>
     <link rel="stylesheet" href="style.css">
-    <!-- AOS Animation Library -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Navigation -->
-    <header>
-        <nav>
-            <div class="logo">Procelligence</div>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+    <!-- Header / Navigation Bar Component -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo">Procelligence AI</div>
+            <nav aria-label="Main navigation">
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#insights">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <h1>Intelligent Solutions for Biotech and Bio/Pharma Innovation</h1>
-        <p>Driving model-based breakthroughs in biotechnology.</p>
-        <a href="#services" class="btn">Our Services</a>
-    </section>
+    <!-- Main Content Wrapper -->
+    <main>
+        <!-- Hero Section Component -->
+        <section id="home" class="hero">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h1>Intelligent Solutions for Biotech and Bio/Pharma Innovation</h1>
+                <p>Driving model-based breakthroughs in biotechnology.</p>
+                <a href="#services" class="btn btn-hero">Our Services</a>
+            </div>
+        </section>
 
-    <!-- About Preview -->
-    <section id="about" class="about" data-aos="fade-up">
-        <h2>About Procelligence</h2>
-        <p>At Procelligence, we combine hybrid (mechanistic and data-driven) modeling and biotech and bio/pharma expertise to accelerate innovation.</p>
-        <a href="#about" class="btn">Learn More</a>
-    </section>
+        <!-- About Section Component -->
+        <section id="about" class="about-section">
+            <div class="container text-center">
+                <h2>About Procelligence AI</h2>
+                <p class="section-desc">At Procelligence AI, we combine hybrid (mechanistic and data-driven) modeling and biotech and bio/pharma expertise to accelerate innovation.</p>
+                <a href="#contact" class="btn btn-primary">Learn More</a>
+            </div>
+        </section>
 
-    <!-- Services Preview -->
-    <section id="services" class="services" data-aos="fade-up">
-        <h2>Our Services</h2>
-        <div class="service-cards">
-            <div class="card">Model-Based Process Design</div>
-            <div class="card">AI-Enhanced Drug Development</div>
-            <div class="card">Biotech and Bio/Pharma Digital Twins</div>
-        </div>
-    </section>
+        <!-- Services Section Component -->
+        <section id="services" class="services-section">
+            <div class="container text-center">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <article class="service-card">
+                        <h3>Model-Based Process Design</h3>
+                        <p>Optimize your workflows with cutting-edge algorithmic layouts and tailored chemical engineering simulations.</p>
+                    </article>
+                    <article class="service-card">
+                        <h3>AI-Enhanced Drug Development</h3>
+                        <p>Accelerate your clinical pipelines using predictive modeling, deep learning architectures, and structured bio-data tools.</p>
+                    </article>
+                    <article class="service-card">
+                        <h3>Biotech and Bio/Pharma Digital Twins</h3>
+                        <p>Deploy virtual replicas of physical bioprocesses for real-time monitoring, troubleshooting, and risk-free scaling.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-    <!-- Blog Preview -->
-    <section id="blog" class="blog" data-aos="fade-right">
-        <h2>Latest Insights</h2>
-        <p>Stay tuned for thought leadership in model-informed development biotech and bio/pharma!</p>
-    </section>
+        <!-- Latest Insights Section Component -->
+        <section id="insights" class="insights-section">
+            <div class="container text-center">
+                <h2>Latest Insights</h2>
+                <p class="section-desc">Stay tuned for thought-provoking expertise and leadership in model-informed development biotech and bio/pharma!</p>
+            </div>
+        </section>
 
-    <!-- Contact CTA -->
-    <section id="contact" class="contact" data-aos="fade-left">
-        <h2>Contact Us</h2>
-        <p>Let's discuss how we can help your biotech and bio/pharma journey.</p>
-        <a href="mailto:info@procelligence.com" class="btn">Get in Touch</a>
-    </section>
+        <!-- Contact Section Component -->
+        <section id="contact" class="contact-section">
+            <div class="container text-center">
+                <h2>Contact Us</h2>
+                <p class="section-desc">Let's discuss how we can help in your biotech and bio/pharma journey.</p>
+                <a href="mailto:info@procelligence.ai" class="btn btn-primary">Get in Touch</a>
+            </div>
+        </section>
+    </main>
 
-    <!-- Footer -->
+    <!-- Global Site Footer Component -->
     <footer>
-        <p>&copy; 2025 Procelligence. All rights reserved.</p>
+        <div class="container text-center">
+            <p>&copy; 2026 Procelligence AI. All rights reserved.</p>
+        </div>
     </footer>
-
-    <!-- AOS Animation Script -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({
-      duration: 1000,  // Animation duration (ms)
-      offset: 100,     // Distance to trigger animation
-      once: true       // Only animate once (no repeat)
-    });
-  </script>  
 
 </body>
 </html>
