@@ -480,5 +480,212 @@
 
         document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
     </script>
+
+    <!-- Procelligence AI Website Assistant -->
+    <button class="chat-launcher" id="chat-launcher" type="button"
+            aria-label="Open Procelligence AI Assistant"
+            aria-expanded="false"
+            aria-controls="chat-panel">
+        <span class="chat-launcher-icon" aria-hidden="true">
+            <span></span><span></span><span></span>
+        </span>
+        <span class="chat-launcher-label">Ask Procelligence AI</span>
+    </button>
+
+    <section class="chat-panel" id="chat-panel" aria-label="Procelligence AI Assistant" aria-hidden="true">
+        <header class="chat-header">
+            <div class="chat-identity">
+                <span class="chat-avatar" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                </span>
+                <div>
+                    <strong>Procelligence AI Assistant</strong>
+                    <span><i></i> Online</span>
+                </div>
+            </div>
+            <button class="chat-close" id="chat-close" type="button" aria-label="Close chat">×</button>
+        </header>
+
+        <div class="chat-messages" id="chat-messages" aria-live="polite">
+            <div class="chat-message assistant">
+                <div class="chat-bubble">
+                    Welcome to Procelligence AI. I can answer questions about our scientific intelligence platform, digital twins, bioprocess modeling, optimization, and AI-enabled development solutions.
+                </div>
+            </div>
+
+            <div class="chat-suggestions" id="chat-suggestions">
+                <button type="button">What does Procelligence AI do?</button>
+                <button type="button">Tell me about your digital twins</button>
+                <button type="button">How can we discuss a project?</button>
+            </div>
+        </div>
+
+        <form class="chat-form" id="chat-form">
+            <label class="sr-only" for="chat-input">Message Procelligence AI Assistant</label>
+            <textarea id="chat-input" rows="1" maxlength="1500"
+                      placeholder="Ask about our platform or services..."
+                      autocomplete="off"></textarea>
+            <button class="chat-send" id="chat-send" type="submit" aria-label="Send message">
+                <span aria-hidden="true">↑</span>
+            </button>
+        </form>
+
+        <div class="chat-disclaimer">
+            AI responses may contain errors. Do not share confidential information.
+        </div>
+    </section>
+
+
+    <script>
+        (() => {
+            const launcher = document.getElementById('chat-launcher');
+            const panel = document.getElementById('chat-panel');
+            const closeButton = document.getElementById('chat-close');
+            const form = document.getElementById('chat-form');
+            const input = document.getElementById('chat-input');
+            const messages = document.getElementById('chat-messages');
+            const suggestions = document.getElementById('chat-suggestions');
+            const sendButton = document.getElementById('chat-send');
+
+            const conversation = [];
+
+            function setOpen(open) {
+                launcher.setAttribute('aria-expanded', String(open));
+                panel.setAttribute('aria-hidden', String(!open));
+                panel.classList.toggle('open', open);
+                if (open) {
+                    window.setTimeout(() => input.focus(), 180);
+                }
+            }
+
+            function escapeHTML(value) {
+                return value.replace(/[&<>"']/g, char => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                })[char]);
+            }
+
+            function formatAssistantText(value) {
+                const safe = escapeHTML(value);
+                return safe
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\n/g, '<br>');
+            }
+
+            function addMessage(role, text) {
+                const wrapper = document.createElement('div');
+                wrapper.className = `chat-message ${role}`;
+
+                const bubble = document.createElement('div');
+                bubble.className = 'chat-bubble';
+                bubble.innerHTML = role === 'assistant'
+                    ? formatAssistantText(text)
+                    : escapeHTML(text);
+
+                wrapper.appendChild(bubble);
+                messages.appendChild(wrapper);
+                messages.scrollTop = messages.scrollHeight;
+            }
+
+            function addTypingIndicator() {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'chat-message assistant';
+                wrapper.id = 'chat-typing';
+
+                const bubble = document.createElement('div');
+                bubble.className = 'chat-bubble chat-typing';
+                bubble.innerHTML = '<span></span><span></span><span></span>';
+
+                wrapper.appendChild(bubble);
+                messages.appendChild(wrapper);
+                messages.scrollTop = messages.scrollHeight;
+            }
+
+            function removeTypingIndicator() {
+                document.getElementById('chat-typing')?.remove();
+            }
+
+            async function sendMessage(message) {
+                const cleanMessage = message.trim();
+                if (!cleanMessage) return;
+
+                suggestions?.remove();
+                addMessage('user', cleanMessage);
+                conversation.push({ role: 'user', content: cleanMessage });
+
+                input.value = '';
+                input.style.height = 'auto';
+                input.disabled = true;
+                sendButton.disabled = true;
+                addTypingIndicator();
+
+                try {
+                    const response = await fetch('/api/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            messages: conversation.slice(-10)
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.error || 'The assistant is temporarily unavailable.');
+                    }
+
+                    const reply = data.reply || 'I could not generate a response.';
+                    removeTypingIndicator();
+                    addMessage('assistant', reply);
+                    conversation.push({ role: 'assistant', content: reply });
+                } catch (error) {
+                    removeTypingIndicator();
+                    addMessage(
+                        'assistant',
+                        'I am temporarily unavailable. Please email busuyi.adebayo@procelligence.ai for assistance.'
+                    );
+                    console.error(error);
+                } finally {
+                    input.disabled = false;
+                    sendButton.disabled = false;
+                    input.focus();
+                }
+            }
+
+            launcher.addEventListener('click', () => setOpen(!panel.classList.contains('open')));
+            closeButton.addEventListener('click', () => setOpen(false));
+
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                sendMessage(input.value);
+            });
+
+            input.addEventListener('keydown', event => {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    form.requestSubmit();
+                }
+            });
+
+            input.addEventListener('input', () => {
+                input.style.height = 'auto';
+                input.style.height = `${Math.min(input.scrollHeight, 120)}px`;
+            });
+
+            document.querySelectorAll('.chat-suggestions button').forEach(button => {
+                button.addEventListener('click', () => sendMessage(button.textContent));
+            });
+
+            document.addEventListener('keydown', event => {
+                if (event.key === 'Escape' && panel.classList.contains('open')) {
+                    setOpen(false);
+                }
+            });
+        })();
+    </script>
+
 </body>
 </html>
