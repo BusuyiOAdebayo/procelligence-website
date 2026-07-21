@@ -87,6 +87,50 @@
   </main>
 
   <footer><div class="container footer-grid"><div><a class="brand footer-brand" href="#home"><span class="brand-mark">P</span><span class="brand-text">Procelligence <strong>AI</strong></span></a><p>Advancing Computational Science &amp; Engineering Intelligence through Agentic AI.</p></div><div class="footer-links"><a href="#platform">Platform</a><a href="#framework">Framework</a><a href="#capabilities">Capabilities</a><a href="#applications">Applications</a></div><div class="footer-meta"><span>© <span id="year"></span> Procelligence AI</span><span>Computational Science &amp; Engineering Intelligence</span></div></div></footer>
+
+
+  <button class="chat-launcher" id="chatLauncher" aria-label="Open Procelligence AI assistant" aria-expanded="false">
+    <span class="chat-launcher-icon">✦</span>
+    <span class="chat-launcher-label">Ask Procelligence AI</span>
+  </button>
+
+  <section class="chat-widget" id="chatWidget" aria-label="Procelligence AI website assistant" aria-hidden="true">
+    <header class="chat-header">
+      <div class="chat-agent">
+        <span class="chat-avatar">P</span>
+        <div>
+          <strong>Procelligence AI Assistant</strong>
+          <span><i></i> Agentic AI guide</span>
+        </div>
+      </div>
+      <div class="chat-header-actions">
+        <button id="chatClear" type="button" title="Clear conversation" aria-label="Clear conversation">↺</button>
+        <button id="chatClose" type="button" title="Close assistant" aria-label="Close assistant">×</button>
+      </div>
+    </header>
+
+    <div class="chat-messages" id="chatMessages" role="log" aria-live="polite">
+      <div class="chat-message assistant">
+        <div class="message-bubble">
+          <strong>Welcome to Procelligence AI.</strong>
+          <p>I can explain our Agentic AI platform, the ReActOR framework, capabilities, and application domains.</p>
+        </div>
+      </div>
+      <div class="chat-suggestions" id="chatSuggestions">
+        <button type="button">What is the ReActOR framework?</button>
+        <button type="button">How can agents use scientific tools?</button>
+        <button type="button">Where can the platform be applied?</button>
+      </div>
+    </div>
+
+    <form class="chat-form" id="chatForm">
+      <label class="sr-only" for="chatInput">Ask Procelligence AI</label>
+      <textarea id="chatInput" rows="1" maxlength="1500" placeholder="Ask about our platform..." required></textarea>
+      <button type="submit" id="chatSend" aria-label="Send message">➜</button>
+    </form>
+    <div class="chat-disclaimer">AI-generated information may be incomplete. Do not share confidential information.</div>
+  </section>
+
   <script src="script.js"></script>
 </body>
 </html>
