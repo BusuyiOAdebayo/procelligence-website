@@ -1,24 +1,13 @@
-# Procelligence AI Website
+# Procelligence AI Website — Version 2.0
 
-Responsive static website focused on **Agentic AI for Computational Science & Engineering Intelligence**, now including a live website chatbot.
+Premium responsive website featuring an animated particle field, interactive ReActOR loop, scientific-agent architecture, workflow demonstration, expandable application domains, research themes, roadmap, and integrated chatbot.
 
-## Main files
+## Vercel deployment
+1. Push this folder to GitHub and import the repository into Vercel.
+2. Add `OPENAI_API_KEY` under **Settings → Environment Variables**.
+3. Optionally add `OPENAI_MODEL`; the default is `gpt-4.1-mini`.
+4. Redeploy.
 
-- `index.html` — site content and chatbot interface
-- `styles.css` — site and chatbot styling
-- `script.js` — navigation, animations, and chatbot client logic
-- `api/chat.js` — secure Vercel serverless chatbot endpoint
-- `images/AgenticAI.png` — ReActOR framework visual
+The API key remains server-side in `/api/chat.js`.
 
-## Chatbot configuration on Vercel
-
-Add these environment variables in the Vercel project:
-
-- `OPENAI_API_KEY` — required; keep it server-side only
-- `OPENAI_MODEL` — optional; defaults to `gpt-4.1-mini`
-
-Then redeploy the project. Never put the API key in `index.html`, `script.js`, or other browser-delivered files.
-
-## Local preview
-
-The visual interface can be previewed locally, but live AI responses require either Vercel deployment or a local server capable of running the `/api/chat` function.
+All public contact references use `contact@procelligence.ai`. No personal identity or personal email is included.
